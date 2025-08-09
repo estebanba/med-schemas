@@ -1,0 +1,49 @@
+{
+  "name": "@estebanbasili/med-schemas",
+  "version": "1.0.0",
+  "description": "Shared Zod schemas for the Medical System (Frontend & Backend)",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run clean && npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "zod",
+    "schemas",
+    "typescript",
+    "medical",
+    "validation"
+  ],
+  "author": "Esteban Basili",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=16"
+  },
+  "peerDependencies": {
+    "zod": "^3.22.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "zod": "^3.22.0",
+    "@types/node": "^20.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/estebanbasili/med-schemas.git"
+  },
+  "bugs": {
+    "url": "https://github.com/estebanbasili/med-schemas/issues"
+  },
+  "homepage": "https://github.com/estebanbasili/med-schemas#readme",
+  "publishConfig": {
+    "access": "public"
+  }
+}

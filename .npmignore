@@ -1,0 +1,19 @@
+# Source files
+src/
+tsconfig.json
+
+# Development files
+.eslintrc.*
+.prettierrc
+.gitignore
+
+# Tests
+__tests__/
+*.test.*
+*.spec.*
+
+# Documentation (except README)
+docs/
+
+# Development dependencies
+.npmrc
