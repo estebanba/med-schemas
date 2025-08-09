@@ -44,7 +44,6 @@
   },
   "homepage": "https://github.com/estebanba/med-schemas#readme",
   "publishConfig": {
-    "access": "public",
-    "registry": "https://npm.pkg.github.com/"
+    "access": "public"
   }
 }
