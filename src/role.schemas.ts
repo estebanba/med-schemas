@@ -67,7 +67,15 @@ export const RoleFormSchema = RoleSchema.omit({
   isSystem: true,
 });
 
+export const RoleFiltersSchema = z.object({
+  page: z.number().min(1).default(1),
+  limit: z.number().min(1).max(100).default(10),
+  search: z.string().optional(),
+  isActive: z.boolean().optional(),
+});
+
 // ===== ROLE TYPES =====
 export type Permission = z.infer<typeof PermissionSchema>;
 export type Role = z.infer<typeof RoleSchema>;
 export type RoleForm = z.infer<typeof RoleFormSchema>;
+export type RoleFilters = z.infer<typeof RoleFiltersSchema>;

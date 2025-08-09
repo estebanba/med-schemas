@@ -1,6 +1,6 @@
 {
   "name": "@estebanba/med-schemas",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Shared Zod schemas for the Medical System (Frontend & Backend)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
