@@ -51,7 +51,10 @@ export const DeclaracionJuradaSchema = z.object({
   firmas: z.object({
     firmaEmpleado: z.string().default(''),
     firmaMedico: z.string().default(''),
-  }).default({}),
+  }).default({
+    firmaEmpleado: '',
+    firmaMedico: ''
+  }),
 });
 
 // ===== MAIN HISTORIA CLINICA SCHEMAS =====

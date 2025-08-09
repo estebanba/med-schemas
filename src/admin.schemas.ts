@@ -53,7 +53,7 @@ export const ActivityLogSchema = z.object({
   action: z.string(),
   resource: z.string(),
   resourceId: ObjectIdSchema.optional(),
-  details: z.record(z.any()).optional(),
+  details: z.record(z.string(), z.array(z.string())).optional(),
   timestamp: z.date(),
   ip: z.string().optional(),
   userAgent: z.string().optional(),
