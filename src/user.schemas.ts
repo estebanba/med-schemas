@@ -1,6 +1,23 @@
 import { z } from 'zod';
 import { ObjectIdSchema, AuthoringSchema } from './common.schemas.js';
 
+// Forward declarations for populated schemas
+const ClientRefSchema = z.object({
+  _id: ObjectIdSchema.optional(),
+  name: z.string(),
+}).optional();
+
+const RoleRefSchema = z.object({
+  _id: ObjectIdSchema.optional(),
+  name: z.string(),
+  permissions: z.array(z.string()).optional(),
+}).optional();
+
+const TeamRefSchema = z.object({
+  _id: ObjectIdSchema.optional(),
+  name: z.string(),
+}).optional();
+
 // ===== USER SCHEMAS =====
 
 export const UserProfileSchema = z.object({
@@ -10,6 +27,17 @@ export const UserProfileSchema = z.object({
   position: z.string().optional(),
   bio: z.string().optional(),
   address: z.string().optional(),
+  // Additional fields for form compatibility
+  name: z.string().optional(),
+  lastName: z.string().optional(),
+  email: z.string().optional(),
+  profile: z.object({
+    avatar: z.string().optional(),
+    phone: z.string().optional(),
+    department: z.string().optional(),
+    position: z.string().optional(),
+    bio: z.string().optional(),
+  }).optional(),
 });
 
 export const UserPreferencesSchema = z.object({
@@ -19,6 +47,7 @@ export const UserPreferencesSchema = z.object({
     email: z.boolean().default(true),
     push: z.boolean().default(true),
     sms: z.boolean().default(false),
+    browser: z.boolean().default(true), // Legacy compatibility
   }).optional(),
 });
 
@@ -30,10 +59,10 @@ export const UserSchema = z.object({
   name: z.string().min(1, "Nombre es requerido"),
   lastName: z.string().optional(),
   
-  // Organizational relationships
-  client: ObjectIdSchema.optional(),
-  team: ObjectIdSchema.optional(),
-  role: ObjectIdSchema.optional(),
+  // Organizational relationships (can be ObjectId strings or populated objects)
+  client: z.union([ObjectIdSchema, ClientRefSchema]).optional(),
+  team: z.union([ObjectIdSchema, TeamRefSchema]).optional(),
+  role: z.union([ObjectIdSchema, RoleRefSchema]).optional(),
   
   // Profile information
   profile: UserProfileSchema.optional(),
@@ -46,6 +75,7 @@ export const UserSchema = z.object({
   
   // User preferences
   preferences: UserPreferencesSchema.optional(),
+  settings: UserPreferencesSchema.optional(), // Legacy compatibility
 }).merge(AuthoringSchema);
 
 export const UserFormSchema = UserSchema.omit({
@@ -67,6 +97,7 @@ export const UserProfileUpdateSchema = z.object({
   email: z.string().email("Email inválido"),
   profile: UserProfileSchema.optional(),
   preferences: UserPreferencesSchema.optional(),
+  settings: UserPreferencesSchema.optional(), // Legacy compatibility
 });
 
 export const ChangePasswordSchema = z.object({

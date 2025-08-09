@@ -19,7 +19,7 @@ export const AuthoringSchema = z.object({
     user: ObjectIdSchema,
     updatedAt: z.date(),
     action: z.string().optional(),
-  })).optional().default([]),
+  })).default([]), // Make default empty array but not required
   createdAt: z.date().optional(),
   updatedAt: z.date().optional(),
 });

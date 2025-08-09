@@ -48,6 +48,7 @@ export const EmpresaFiltersSchema = z.object({
   page: z.number().min(1).default(1),
   limit: z.number().min(1).max(100).default(10),
   search: z.string().optional(),
+  searchTerm: z.string().optional(), // Legacy compatibility
   sector: z.enum([
     'todos',
     'construccion',
@@ -60,7 +61,7 @@ export const EmpresaFiltersSchema = z.object({
     'alimentario',
     'logistica',
     'otros'
-  ]).optional(),
+  ]).or(z.literal("")).optional(), // Allow empty string
   activa: z.boolean().optional(),
 });
 

@@ -35,7 +35,9 @@ export const PERMISSIONS = {
   
   // Reports and analytics
   REPORTS_READ: 'reports_read',
+  REPORTS_VIEW: 'reports_view',
   ANALYTICS_READ: 'analytics_read',
+  HISTORIA_EXPORT: 'historia_export',
 } as const;
 
 export const PermissionSchema = z.enum([
@@ -44,7 +46,7 @@ export const PermissionSchema = z.enum([
   'company_read', 'company_create', 'company_update', 'company_delete',
   'historia_read', 'historia_create', 'historia_update', 'historia_delete',
   'admin', 'super_admin', 'user_management',
-  'reports_read', 'analytics_read'
+  'reports_read', 'reports_view', 'analytics_read', 'historia_export'
 ]);
 
 export const RoleSchema = z.object({

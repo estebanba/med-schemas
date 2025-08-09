@@ -42,8 +42,8 @@ export const ExamenesComplementariosSchema = z.object({
 });
 
 export const ClasificacionAptitudSchema = z.object({
-  aptitud: z.enum(["A", "N", ""]).default(""),
-  conPreexistencias: z.enum(["con", "sin", ""]).default(""),
+  aptitud: z.enum(["A", "N", ""]).optional(),
+  conPreexistencias: z.enum(["con", "sin", ""]).optional(),
 });
 
 export const DeclaracionJuradaSchema = z.object({
@@ -124,6 +124,11 @@ export const HistoriaClinicaFormSchema = HistoriaClinicaSchema.omit({
   modifiedBy: true,
 });
 
+// Schema with required _id for existing records
+export const HistoriaClinicaDocumentSchema = HistoriaClinicaSchema.extend({
+  _id: ObjectIdSchema, // Required for existing documents
+});
+
 export const HistoriaClinicaUpdateSchema = HistoriaClinicaSchema.partial().omit({
   client: true, // Cannot change client
   paciente: true, // Cannot change patient
@@ -142,6 +147,7 @@ export const HistoriaClinicaFiltersSchema = z.object({
 
 // ===== HISTORIA CLINICA TYPES =====
 export type HistoriaClinica = z.infer<typeof HistoriaClinicaSchema>;
+export type HistoriaClinicaDocument = z.infer<typeof HistoriaClinicaDocumentSchema>;
 export type HistoriaClinicaWithPatient = z.infer<typeof HistoriaClinicaWithPatientSchema>;
 export type HistoriaClinicaForm = z.infer<typeof HistoriaClinicaFormSchema>;
 export type HistoriaClinicaUpdate = z.infer<typeof HistoriaClinicaUpdateSchema>;
