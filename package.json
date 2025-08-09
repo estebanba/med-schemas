@@ -1,5 +1,5 @@
 {
-  "name": "@estebanbasili/med-schemas",
+  "name": "@estebanba/med-schemas",
   "version": "1.0.0",
   "description": "Shared Zod schemas for the Medical System (Frontend & Backend)",
   "main": "dist/index.js",
@@ -37,13 +37,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/estebanbasili/med-schemas.git"
+    "url": "git+https://github.com/estebanba/med-schemas.git"
   },
   "bugs": {
-    "url": "https://github.com/estebanbasili/med-schemas/issues"
+    "url": "https://github.com/estebanba/med-schemas/issues"
   },
-  "homepage": "https://github.com/estebanbasili/med-schemas#readme",
+  "homepage": "https://github.com/estebanba/med-schemas#readme",
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://npm.pkg.github.com/"
   }
 }
