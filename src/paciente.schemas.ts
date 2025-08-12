@@ -12,7 +12,10 @@ export const PacienteSchema = z.object({
   _id: ObjectIdSchema.optional(),
   apellido: z.string().min(1, "Apellido es requerido").transform(val => val.trim()),
   nombres: z.string().min(1, "Nombres es requerido").transform(val => val.trim()),
-  dni: z.string().optional().transform(val => val && val.trim() || undefined),
+  dni: z.string()
+    .min(1, "DNI es requerido")
+    .regex(/^\d+$/, "DNI debe contener solo números")
+    .transform(val => val.trim()),
   cuil: z.string().optional().transform(val => val && val.trim() || undefined),
   nacionalidad: z.string().optional().transform(val => val && val.trim() || undefined),
   fechaNacimiento: z.string().optional().transform(val => val && val.trim() || undefined),
