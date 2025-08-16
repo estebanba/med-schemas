@@ -84,39 +84,6 @@ export const HistoriaClinicaSchema = z.object({
   error: z.string().optional(),
 }).merge(AuthoringSchema);
 
-// Form schema for when patient data is included inline (legacy support)
-export const HistoriaClinicaWithPatientSchema = z.object({
-  _id: ObjectIdSchema.optional(),
-  fecha: z.string().optional(),
-  tipoExamen: z.string().optional(),
-  
-  // Patient data (for forms that include patient data inline)
-  apellido: z.string().optional(),
-  nombres: z.string().min(1, "Nombres es requerido"),
-  empresa: ObjectIdSchema.optional(), // Company ID
-  dni: z.string().optional(),
-  cuil: z.string().optional(),
-  nacionalidad: z.string().optional(),
-  edad: z.number().min(0).max(120).optional(),
-  fechaNacimiento: z.string().optional(),
-  estadoCivil: z.string().optional(),
-  hijos: z.array(z.number()).optional(),
-  estudios: z.string().optional(),
-  titulos: z.string().optional(),
-  domicilio: z.string().optional(),
-  
-  // Historia Clinica data
-  antecedentesPersonalesFamiliares: AntecedentesPersonalesFamiliaresSchema.optional(),
-  antecedentesLaborales: AntecedentesLaboralesSchema.optional(),
-  examen: ExamenSchema.optional(),
-  examenesComplementarios: ExamenesComplementariosSchema.optional(),
-  tareasDesempenar: z.string().optional(),
-  calificacionEmpresarial: z.string().optional(),
-  clasificacionAptitud: ClasificacionAptitudSchema.optional(),
-  informeHallazgos: z.string().optional(),
-  declaracionJurada: DeclaracionJuradaSchema.optional(),
-  error: z.string().optional(),
-});
 
 export const HistoriaClinicaFormSchema = HistoriaClinicaSchema.omit({
   _id: true,
@@ -151,7 +118,6 @@ export const HistoriaClinicaFiltersSchema = z.object({
 // ===== HISTORIA CLINICA TYPES =====
 export type HistoriaClinica = z.infer<typeof HistoriaClinicaSchema>;
 export type HistoriaClinicaDocument = z.infer<typeof HistoriaClinicaDocumentSchema>;
-export type HistoriaClinicaWithPatient = z.infer<typeof HistoriaClinicaWithPatientSchema>;
 export type HistoriaClinicaForm = z.infer<typeof HistoriaClinicaFormSchema>;
 export type HistoriaClinicaUpdate = z.infer<typeof HistoriaClinicaUpdateSchema>;
 export type HistoriaClinicaFilters = z.infer<typeof HistoriaClinicaFiltersSchema>;
