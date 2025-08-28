@@ -47,7 +47,6 @@ export const ClasificacionAptitudSchema = z.object({
 });
 
 export const DeclaracionJuradaSchema = z.object({
-  texto: z.string().default(''),
   firmas: z.object({
     firmaEmpleado: z.string().default(''),
     firmaMedico: z.string().default(''),
@@ -59,17 +58,17 @@ export const DeclaracionJuradaSchema = z.object({
 
 // ===== MAIN HISTORIA CLINICA SCHEMAS =====
 
+// Core domain model - pure business logic only
 export const HistoriaClinicaSchema = z.object({
   _id: ObjectIdSchema.optional(),
-  fecha: z.string().optional(),
-  tipoExamen: z.string().optional(),
+  fecha: z.string().min(1, "Fecha es requerida"),
+  tipoExamen: z.string().min(1, "Tipo de examen es requerido"),
   
-  // Reference to Patient model instead of duplicating data
-  paciente: ObjectIdSchema, // Required Patient ID
+  // Clean ObjectId references only
+  paciente: ObjectIdSchema,
+  client: ObjectIdSchema,
   
-  // Client isolation - Historia Clinica belongs to a client
-  client: ObjectIdSchema, // Required Client ID
-  
+  // Medical data sections
   antecedentesPersonalesFamiliares: AntecedentesPersonalesFamiliaresSchema.optional(),
   antecedentesLaborales: AntecedentesLaboralesSchema.optional(),
   examen: ExamenSchema.optional(),
@@ -79,13 +78,11 @@ export const HistoriaClinicaSchema = z.object({
   clasificacionAptitud: ClasificacionAptitudSchema.optional(),
   informeHallazgos: z.string().optional(),
   declaracionJurada: DeclaracionJuradaSchema.optional(),
-  
-  // Frontend-specific field for offline/error handling
-  error: z.string().optional(),
 }).merge(AuthoringSchema);
 
 
-export const HistoriaClinicaFormSchema = HistoriaClinicaSchema.omit({
+// Schema for creating new Historia Clinica (excludes auto-generated fields)
+export const HistoriaClinicaCreateSchema = HistoriaClinicaSchema.omit({
   _id: true,
   client: true, // Injected by middleware
   createdAt: true,
@@ -94,14 +91,18 @@ export const HistoriaClinicaFormSchema = HistoriaClinicaSchema.omit({
   modifiedBy: true,
 });
 
-// Schema with required _id for existing records
-export const HistoriaClinicaDocumentSchema = HistoriaClinicaSchema.extend({
-  _id: ObjectIdSchema, // Required for existing documents
-});
-
+// Schema for updating existing Historia Clinica
 export const HistoriaClinicaUpdateSchema = HistoriaClinicaSchema.partial().omit({
+  _id: true,
   client: true, // Cannot change client
   paciente: true, // Cannot change patient
+  createdAt: true,
+  createdBy: true,
+});
+
+// Schema for database documents (with required _id)
+export const HistoriaClinicaDocumentSchema = HistoriaClinicaSchema.extend({
+  _id: ObjectIdSchema, // Required for existing documents
 });
 
 export const HistoriaClinicaFiltersSchema = z.object({
@@ -115,10 +116,10 @@ export const HistoriaClinicaFiltersSchema = z.object({
   fechaHasta: z.string().optional(),
 });
 
-// ===== HISTORIA CLINICA TYPES =====
+// ===== DOMAIN TYPES =====
 export type HistoriaClinica = z.infer<typeof HistoriaClinicaSchema>;
 export type HistoriaClinicaDocument = z.infer<typeof HistoriaClinicaDocumentSchema>;
-export type HistoriaClinicaForm = z.infer<typeof HistoriaClinicaFormSchema>;
+export type HistoriaClinicaCreate = z.infer<typeof HistoriaClinicaCreateSchema>;
 export type HistoriaClinicaUpdate = z.infer<typeof HistoriaClinicaUpdateSchema>;
 export type HistoriaClinicaFilters = z.infer<typeof HistoriaClinicaFiltersSchema>;
 
