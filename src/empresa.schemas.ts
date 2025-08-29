@@ -31,6 +31,11 @@ export const EmpresaSchema = z.object({
   activa: z.boolean().default(true),
 }).merge(AuthoringSchema);
 
+// Schema for Empresa with patient count (used in lists/reports)
+export const EmpresaWithPatientCountSchema = EmpresaSchema.extend({
+  patientCount: z.number().default(0),
+});
+
 export const EmpresaFormSchema = EmpresaSchema.omit({
   _id: true,
   client: true, // Injected by middleware
@@ -67,6 +72,7 @@ export const EmpresaFiltersSchema = z.object({
 
 // ===== EMPRESA TYPES =====
 export type Empresa = z.infer<typeof EmpresaSchema>;
+export type EmpresaWithPatientCount = z.infer<typeof EmpresaWithPatientCountSchema>;
 export type EmpresaForm = z.infer<typeof EmpresaFormSchema>;
 export type EmpresaUpdate = z.infer<typeof EmpresaUpdateSchema>;
 export type EmpresaFilters = z.infer<typeof EmpresaFiltersSchema>;
