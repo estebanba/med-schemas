@@ -88,7 +88,8 @@ export const AuditLogSchema = z.object({
   // Who did it
   userId: ObjectIdSchema.optional(), // User who performed the action
   userName: z.string().optional(),   // Username for failed logins
-  clientId: ObjectIdSchema.optional(), // Client organization
+  organizationId: ObjectIdSchema.optional(), // Organization
+  clientId: ObjectIdSchema.optional(), // Deprecated - use organizationId
   
   // When and where
   timestamp: z.date().default(() => new Date()),
