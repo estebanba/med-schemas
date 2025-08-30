@@ -7,8 +7,6 @@ const OrganizationRefSchema = z.object({
   name: z.string(),
 }).optional();
 
-// Deprecated: Use OrganizationRefSchema
-const ClientRefSchema = OrganizationRefSchema;
 
 const RoleRefSchema = z.object({
   _id: ObjectIdSchema.optional(),
@@ -64,7 +62,6 @@ export const UserSchema = z.object({
   
   // Organizational relationships (can be ObjectId strings or populated objects)
   organization: z.union([ObjectIdSchema, OrganizationRefSchema]).optional(),
-  client: z.union([ObjectIdSchema, ClientRefSchema]).optional(), // Deprecated: use organization
   team: z.union([ObjectIdSchema, TeamRefSchema]).optional(),
   role: z.union([ObjectIdSchema, RoleRefSchema]).optional(),
   

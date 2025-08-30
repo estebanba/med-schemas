@@ -42,6 +42,7 @@ export const AuditResourceSchema = z.enum([
   'HISTORIA_CLINICA',
   'PACIENTE', 
   'EMPRESA',
+  'ORGANIZATION',
   'USER',
   'AUTH',
   'SYSTEM',
@@ -89,7 +90,6 @@ export const AuditLogSchema = z.object({
   userId: ObjectIdSchema.optional(), // User who performed the action
   userName: z.string().optional(),   // Username for failed logins
   organizationId: ObjectIdSchema.optional(), // Organization
-  clientId: ObjectIdSchema.optional(), // Deprecated - use organizationId
   
   // When and where
   timestamp: z.date().default(() => new Date()),
