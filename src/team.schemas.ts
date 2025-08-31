@@ -13,7 +13,7 @@ export const TeamSchema = z.object({
   _id: ObjectIdSchema.optional(),
   name: z.string().min(1, "Nombre del equipo es requerido"),
   description: z.string().optional(),
-  client: ObjectIdSchema, // Required - Team belongs to a client
+  organization: ObjectIdSchema, // Required - Team belongs to an organization
   isActive: z.boolean().default(true),
   settings: TeamSettingsSchema.optional(),
 }).merge(AuthoringSchema);
