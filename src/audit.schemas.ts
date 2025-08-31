@@ -23,6 +23,8 @@ export const AuditActionSchema = z.enum([
   'LOGOUT',         // User logout
   'LOGIN_FAILED',   // Failed login attempt
   'SESSION_EXPIRED', // Session expiration
+  'TOKEN_REFRESH',  // Token refresh
+  'TOKEN_REFRESH_FAILED', // Token refresh failed
   
   // Administrative actions
   'USER_CREATE',    // Creating new users
@@ -47,6 +49,7 @@ export const AuditResourceSchema = z.enum([
   'AUTH',
   'SYSTEM',
   'FILE',
+  'INVITATION',
   'EXPORT',
 ]);
 

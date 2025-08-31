@@ -22,7 +22,8 @@ export const InvitationSchema = z.object({
   // Invitation details
   email: z.string().email("Email inválido"),
   invitedBy: ObjectIdSchema, // User who sent the invitation
-  client: ObjectIdSchema, // Client the user is being invited to
+  client: ObjectIdSchema.optional(), // Legacy client field
+  organization: ObjectIdSchema.optional(), // New organization field
   role: InvitationRoleEnum.default('user'),
   
   // Invitation status
