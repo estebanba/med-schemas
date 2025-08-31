@@ -61,7 +61,6 @@ export const UserSchema = z.object({
   lastName: z.string().optional(),
   
   // Organizational relationships (can be ObjectId strings or populated objects)
-  organization: z.union([ObjectIdSchema, OrganizationRefSchema]).optional(),
   organizations: z.array(z.union([ObjectIdSchema, OrganizationRefSchema])).optional(),
   team: z.union([ObjectIdSchema, TeamRefSchema]).optional(),
   role: z.union([ObjectIdSchema, RoleRefSchema]).optional(),
