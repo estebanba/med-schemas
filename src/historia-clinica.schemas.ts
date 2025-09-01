@@ -66,7 +66,7 @@ export const HistoriaClinicaSchema = z.object({
   
   // Clean ObjectId references only
   paciente: ObjectIdSchema,
-  client: ObjectIdSchema,
+  organization: ObjectIdSchema,
   
   // Medical data sections
   antecedentesPersonalesFamiliares: AntecedentesPersonalesFamiliaresSchema.optional(),
@@ -84,7 +84,7 @@ export const HistoriaClinicaSchema = z.object({
 // Schema for creating new Historia Clinica (excludes auto-generated fields)
 export const HistoriaClinicaCreateSchema = HistoriaClinicaSchema.omit({
   _id: true,
-  client: true, // Injected by middleware
+  organization: true, // Injected by middleware
   createdAt: true,
   updatedAt: true,
   createdBy: true,
@@ -94,7 +94,7 @@ export const HistoriaClinicaCreateSchema = HistoriaClinicaSchema.omit({
 // Schema for updating existing Historia Clinica
 export const HistoriaClinicaUpdateSchema = HistoriaClinicaSchema.partial().omit({
   _id: true,
-  client: true, // Cannot change client
+  organization: true, // Cannot change organization
   paciente: true, // Cannot change patient
   createdAt: true,
   createdBy: true,
