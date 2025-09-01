@@ -25,8 +25,8 @@ export const EmpresaSchema = z.object({
   email: z.string().email().optional().or(z.literal("")).transform(val => val || undefined),
   contacto: z.string().optional().transform(val => val && val.trim() || undefined),
   
-  // Client isolation - Empresa belongs to a client
-  client: ObjectIdSchema, // Required
+  // Organization isolation - Empresa belongs to an organization
+  organization: ObjectIdSchema, // Required
   
   activa: z.boolean().default(true),
 }).merge(AuthoringSchema);
@@ -38,7 +38,7 @@ export const EmpresaWithPatientCountSchema = EmpresaSchema.extend({
 
 export const EmpresaFormSchema = EmpresaSchema.omit({
   _id: true,
-  client: true, // Injected by middleware
+  organization: true, // Injected by middleware
   createdAt: true,
   updatedAt: true,
   createdBy: true,
@@ -46,7 +46,7 @@ export const EmpresaFormSchema = EmpresaSchema.omit({
 });
 
 export const EmpresaUpdateSchema = EmpresaSchema.partial().omit({
-  client: true, // Cannot change client
+  organization: true, // Cannot change organization
 });
 
 export const EmpresaFiltersSchema = z.object({

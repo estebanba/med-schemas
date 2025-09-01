@@ -34,15 +34,15 @@ export const PacienteSchema = z.object({
   // Reference to Company
   empresa: ObjectIdSchema.optional(),
   
-  // Client isolation - Paciente belongs to a client
-  client: ObjectIdSchema.optional(), // Made optional for flexibility
+  // Organization isolation - Paciente belongs to an organization
+  organization: ObjectIdSchema.optional(), // Made optional for flexibility
   
   activo: z.boolean().default(true).optional(),
 }).merge(AuthoringSchema);
 
 export const PacienteFormSchema = PacienteSchema.omit({
   _id: true,
-  client: true, // Injected by middleware
+  organization: true, // Injected by middleware
   createdAt: true,
   updatedAt: true,
   createdBy: true,
@@ -50,7 +50,7 @@ export const PacienteFormSchema = PacienteSchema.omit({
 });
 
 export const PacienteUpdateSchema = PacienteSchema.partial().omit({
-  client: true, // Cannot change client
+  organization: true, // Cannot change organization
 });
 
 export const PacienteFiltersSchema = z.object({
