@@ -6,6 +6,7 @@ import { ObjectIdSchema } from './common.schemas.js';
 // Audit action types for medical records
 export const AuditActionSchema = z.enum([
   // Data access actions
+  'READ',           // Reading/accessing data (general read operation)
   'VIEW',           // Viewing patient/historia clinica data
   'SEARCH',         // Searching for records
   'LIST',           // Listing multiple records
