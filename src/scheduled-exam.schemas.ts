@@ -49,7 +49,10 @@ export const ScheduledExamSchema = z.object({
   description: z.string().optional(),
   
   // Scheduling details - just date
-  examDate: z.date(),
+  examDate: z.union([
+    z.date(), 
+    z.string().transform((val) => new Date(val))
+  ]),
   
   // Location - single field
   location: z.string().min(1, "Ubicación es requerida"),
@@ -85,6 +88,7 @@ export const CreateScheduledExamSchema = ScheduledExamSchema.omit({
   _id: true,
   generatedHistorias: true,
   stats: true,
+  organization: true, // Added by backend middleware
   createdAt: true,
   updatedAt: true,
   createdBy: true,
