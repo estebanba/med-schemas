@@ -37,6 +37,9 @@ export const PacienteSchema = z.object({
   // Organization isolation - Paciente belongs to an organization
   organization: ObjectIdSchema.optional(), // Made optional for flexibility
   
+  // Scheduled exams this patient is assigned to
+  scheduledExams: z.array(ObjectIdSchema).default([]),
+  
   activo: z.boolean().default(true).optional(),
 }).merge(AuthoringSchema);
 

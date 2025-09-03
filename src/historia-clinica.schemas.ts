@@ -67,6 +67,7 @@ export const HistoriaClinicaSchema = z.object({
   // Clean ObjectId references only
   paciente: ObjectIdSchema,
   organization: ObjectIdSchema,
+  scheduledExam: ObjectIdSchema.optional(), // Optional reference to scheduled exam
   
   // Medical data sections
   antecedentesPersonalesFamiliares: AntecedentesPersonalesFamiliaresSchema.optional(),
