@@ -52,6 +52,7 @@ export const AuditResourceSchema = z.enum([
   'FILE',
   'INVITATION',
   'EXPORT',
+  'SCHEDULED_EXAM',
 ]);
 
 // Audit severity levels
