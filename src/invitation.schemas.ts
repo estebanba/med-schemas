@@ -70,8 +70,10 @@ export const NotificationTypeEnum = z.enum([
   'invitation_accepted',
   'invitation_declined',
   'user_joined_client',
+  'user_joined_organization', // New organization type
   'user_left_client',
   'client_created',
+  'organization_created', // New organization type
   'role_changed'
 ]);
 
@@ -87,8 +89,8 @@ export const NotificationSchema = z.object({
   message: z.string(),
   
   // Related entities
-  relatedId: ObjectIdSchema.optional(), // ID of related entity (invitation, user, client)
-  relatedType: z.enum(['invitation', 'user', 'client']).optional(),
+  relatedId: ObjectIdSchema.optional(), // ID of related entity (invitation, user, organization)
+  relatedType: z.enum(['invitation', 'user', 'client', 'organization']).optional(),
   
   // Notification state
   isRead: z.boolean().default(false),
