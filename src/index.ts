@@ -9,7 +9,6 @@ export * from './user.schemas.js';
 export * from './organization.schemas.js';
 export * from './role.schemas.js';
 export * from './team.schemas.js';
-export * from './invitation.schemas.js';
 export * from './paciente.schemas.js';
 export * from './empresa.schemas.js';
 export * from './historia-clinica.schemas.js';
