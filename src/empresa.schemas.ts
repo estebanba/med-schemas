@@ -24,6 +24,7 @@ export const EmpresaSchema = z.object({
   telefono: z.string().optional().transform(val => val && val.trim() || undefined),
   email: z.string().email().optional().or(z.literal("")).transform(val => val || undefined),
   contacto: z.string().optional().transform(val => val && val.trim() || undefined),
+  calificacionEmpresarial: z.string().optional().transform(val => val && val.trim() || undefined),
   
   // Organization isolation - Empresa belongs to an organization
   organization: ObjectIdSchema, // Required
