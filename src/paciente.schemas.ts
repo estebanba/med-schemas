@@ -3,11 +3,6 @@ import { ObjectIdSchema, AuthoringSchema } from './common.schemas.js';
 
 // ===== PACIENTE SCHEMAS =====
 
-export const HijoSchema = z.object({
-  edad: z.number().min(0).max(50),
-  observaciones: z.string().optional(),
-});
-
 export const PacienteSchema = z.object({
   _id: ObjectIdSchema.optional(),
   apellido: z.string().min(1, "Apellido es requerido").transform(val => val.trim()),
@@ -27,7 +22,7 @@ export const PacienteSchema = z.object({
   email: z.string().email().optional().or(z.literal("")).transform(val => val || undefined),
   puesto: z.string().optional().transform(val => val && val.trim() || undefined),
   fechaIngreso: z.string().optional().transform(val => val && val.trim() || undefined),
-  hijos: z.array(HijoSchema).optional().default([]),
+  hijos: z.string().optional().transform(val => val && val.trim() || undefined),
   estudios: z.string().optional().transform(val => val && val.trim() || undefined),
   titulos: z.string().optional().transform(val => val && val.trim() || undefined),
   
@@ -71,4 +66,3 @@ export type Paciente = z.infer<typeof PacienteSchema>;
 export type PacienteForm = z.infer<typeof PacienteFormSchema>;
 export type PacienteUpdate = z.infer<typeof PacienteUpdateSchema>;
 export type PacienteFilters = z.infer<typeof PacienteFiltersSchema>;
-export type Hijo = z.infer<typeof HijoSchema>;
