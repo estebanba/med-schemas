@@ -62,7 +62,7 @@ export const DeclaracionJuradaSchema = z.object({
 export const HistoriaClinicaSchema = z.object({
   _id: ObjectIdSchema.optional(),
   fecha: z.string().min(1, "Fecha es requerida"),
-  tipoExamen: z.string().min(1, "Tipo de examen es requerido"),
+  tipoExamen: z.string().optional(),
   
   // Clean ObjectId references only
   paciente: ObjectIdSchema,
