@@ -13,8 +13,6 @@ export * from './paciente.schemas.js';
 export * from './empresa.schemas.js';
 export * from './historia-clinica.schemas.js';
 export * from './scheduled-exam.schemas.js';
-export * from './admin.schemas.js';
-export * from './audit.schemas.js';
 export * from './invitation.schemas.js';
 
 // Re-export zod for convenience
