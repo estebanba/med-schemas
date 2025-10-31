@@ -69,6 +69,9 @@ export const HistoriaClinicaSchema = z.object({
   organization: ObjectIdSchema,
   scheduledExam: ObjectIdSchema.optional(), // Optional reference to scheduled exam
   
+  // Status field for analytics and filtering
+  activo: z.boolean().default(true),
+  
   // Medical data sections
   antecedentesPersonalesFamiliares: AntecedentesPersonalesFamiliaresSchema.optional(),
   antecedentesLaborales: AntecedentesLaboralesSchema.optional(),
