@@ -29,7 +29,7 @@ export const EmpresaSchema = z.object({
   // Organization isolation - Empresa belongs to an organization
   organization: ObjectIdSchema, // Required
   
-  activa: z.boolean().default(true),
+  isActive: z.boolean().default(true),
 }).merge(AuthoringSchema);
 
 // Schema for Empresa with patient count (used in lists/reports)
@@ -68,7 +68,7 @@ export const EmpresaFiltersSchema = z.object({
     'logistica',
     'otros'
   ]).or(z.literal("")).optional(), // Allow empty string
-  activa: z.boolean().optional(),
+  isActive: z.boolean().optional(),
 });
 
 // ===== EMPRESA TYPES =====

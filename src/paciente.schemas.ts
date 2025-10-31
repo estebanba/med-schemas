@@ -35,7 +35,7 @@ export const PacienteSchema = z.object({
   // Scheduled exams this patient is assigned to
   scheduledExams: z.array(ObjectIdSchema).default([]),
   
-  activo: z.boolean().default(true).optional(),
+  isActive: z.boolean().default(true).optional(),
 }).merge(AuthoringSchema);
 
 export const PacienteFormSchema = PacienteSchema.omit({
@@ -57,7 +57,7 @@ export const PacienteFiltersSchema = z.object({
   search: z.string().optional(),
   query: z.string().optional(), // Legacy compatibility
   empresa: ObjectIdSchema.optional(),
-  activo: z.boolean().optional(),
+  isActive: z.boolean().optional(),
   sexo: z.enum(['M', 'F', 'Otro']).or(z.literal("")).optional(),
 });
 
