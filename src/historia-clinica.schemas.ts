@@ -29,11 +29,10 @@ export const ExamenSchema = z.object({
 });
 
 export const ExamenComplementarioSchema = z.object({
-  solicitado: z.boolean().default(false),
+  solicitado: z.boolean().nullable().default(null),
   fecha: z.string().default(''),
-  n: z.boolean().default(false),
-  a: z.boolean().default(false),
   aptitud: z.enum(["N", "A", ""]).default(""),
+  customTitle: z.string().optional(), // For custom exams
 });
 
 export const ExamenesComplementariosSchema = z.object({
