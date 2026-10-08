@@ -60,6 +60,9 @@ export const ScheduledExamSchema = z.object({
   // Business context
   company: ObjectIdSchema, // Empresa conducting the exam
   examType: ExamTypeEnum,
+
+  // Workflow state
+  status: ScheduledExamStatusEnum.default('draft'),
   
   // Resource allocation
   assignedStaff: z.array(ObjectIdSchema).default([]), // Medical staff assigned
