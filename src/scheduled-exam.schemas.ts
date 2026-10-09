@@ -60,6 +60,9 @@ export const ScheduledExamSchema = z.object({
   // Business context
   company: ObjectIdSchema, // Empresa conducting the exam
   examType: ExamTypeEnum,
+
+  // Workflow state
+  status: ScheduledExamStatusEnum.default('draft'),
   
   // Resource allocation
   assignedStaff: z.array(ObjectIdSchema).default([]), // Medical staff assigned
@@ -95,7 +98,13 @@ export const CreateScheduledExamSchema = ScheduledExamSchema.omit({
   modifiedBy: true,
 });
 
-export const UpdateScheduledExamSchema = CreateScheduledExamSchema.partial();
+// Partial update: no defaults, so fields that are not sent keep their stored value
+// (with .partial() alone the defaults applied and an edit emptied the patient list)
+export const UpdateScheduledExamSchema = CreateScheduledExamSchema.partial().extend({
+  status: ScheduledExamStatusEnum.optional(),
+  assignedStaff: z.array(ObjectIdSchema).optional(),
+  registeredPatients: z.array(PatientRegistrationSchema).optional(),
+});
 
 // Schema for adding/removing patients from scheduled exam
 export const ManagePatientsSchema = z.object({
